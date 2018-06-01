@@ -1,0 +1,50 @@
+{#
+ # Passed in variables:
+ #
+ #   * twigparent            — string    Template name to inherit from
+ #   * form_associate        — FormView  Authentiction provider form (Symfony\Component\Form\FormView)
+ #   * form_login_oauth      — FormView  OAuth login form (Symfony\Component\Form\FormView)
+ #   * form_login_password   — FormView  Password login form (Symfony\Component\Form\FormView)
+ #   * form_profile_register — FormView  New registrtion form (Symfony\Component\Form\FormView)
+ #   * feedback              — Feedback  Informational, error, and debug feedback messages. @see feedback/feedback.twig
+ #   * templates             — array
+ #     * feedback            — string    Feedback messages template name
+ #   * providers             — array     Authentication providers enabled in Auth configuration
+ #   * transitional          — boolean   If true, form is still in a transitional stage and doesn't require a password field
+ #}
+{% extends twigparent %}
+
+{% block auth %}
+    <div class="row">
+        <h4>{{ __('New Auth') }}</h4>
+    </div>
+
+    {{ include(templates.feedback) }}
+
+    <div class="row register">
+
+        <div class="small-12 columns">
+
+            {{ form_start(form_profile_register) }}
+
+            {{ form_errors(form_profile_register) }}
+
+            {{ form_row(form_profile_register.displayname, { 'value': auth.name|default() } ) }}
+            {{ form_row(form_profile_register.email, { 'value': auth.email|default() } ) }}
+
+            {% if transitional %}
+                {% do form_profile_register.password.setRendered %}
+            {% else %}
+                {{ form_widget(form_profile_register.password.first, { 'attr': {'autocomplete': 'new-password'}}) }}
+                {{ form_widget(form_profile_register.password.second, { 'attr': {'autocomplete': 'new-password'}}) }}
+            {% endif %}
+
+                <br>
+            {{ form_row(form_profile_register.submit, { 'attr': { 'class': 'button btn btn-default' }}) }}
+
+            {{ form_end(form_profile_register) }}
+
+        </div>
+
+    </div>
+{% endblock %}

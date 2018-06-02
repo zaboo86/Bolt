@@ -1,0 +1,42 @@
+{% extends 'partials/_master.twig' %}
+
+{% block main %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+
+<h2>Responsive Social Login Form</h2>
+<p>Resize the browser window to see the responsive effect. When the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other.</p>
+
+<div class="container">
+ 
+    <div class="row">
+     
+      {{ auth_profile_register() }}
+    </div>
+        </div>
+        {# {{ boltforms('contact') }} #}
+        {# <input type="text" name="username" placeholder="Username" required>#}
+        {# <input type="password" name="password" placeholder="Password" required>#}
+        {# <input type="text" name="vorname" placeholder="vorname" required>#}
+        {# <input type="text" name="nachname" placeholder="vorname" required>#}
+        {# <input type="submit" value="Login">#}
+        {# <input type="submit" value="Registration">#}
+    
+      
+  
+
+
+<div class="bottom-container">
+  <div class="row">
+    <div class="col">
+      <a href="#" style="color:white" class="btn">Sign up</a>
+    </div>
+    <div class="col">
+      <a href="#" style="color:white" class="btn">Forgot password?</a>
+    </div>
+  </div>
+</div>
+
+</body>
+{% endblock main %}
